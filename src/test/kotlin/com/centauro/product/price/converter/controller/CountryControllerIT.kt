@@ -28,8 +28,8 @@ class CountryControllerIT : IntegrationSetup() {
         }.andExpect {
             status { isOk }
             content { contentType(MediaType.APPLICATION_JSON) }
-            jsonPath("$.[0]code") { value("USD") }
-            jsonPath("$.[1]code") { value("INR") }
+            jsonPath("$.[0]code") { isNotEmpty }
+            jsonPath("$.[1]code") { isNotEmpty }
             jsonPath("$.length()") { value(2) }
         }
     }

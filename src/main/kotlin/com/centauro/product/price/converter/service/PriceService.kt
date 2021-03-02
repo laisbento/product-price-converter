@@ -21,7 +21,7 @@ class PriceService(
 
         return countryId?.let {
             val code = countryService.getCountryById(it)
-            val pairCode = BRL.plus(code)
+            val pairCode = BRL.plus(code.code)
 
             val currencyRate = currencyService.getCurrencyRate(pairCode)[pairCode]!!.values.first()
 

@@ -1,10 +1,10 @@
 package com.centauro.product.price.converter.configuration
 
 import com.amazonaws.services.dynamodbv2.document.DynamoDB
+import org.junit.After
+import org.junit.Before
 import org.junit.jupiter.api.AfterAll
-import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.TestInstance
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
@@ -56,8 +56,8 @@ class IntegrationSetup {
 
     @AfterAll
     fun setUpAfterClass() {
-        Tables.dropTableCountries()
-        Tables.dropTableProduct()
+        dynamoDB.getTable("countries").delete()
+        dynamoDB.getTable("product").delete()
     }
 
 }

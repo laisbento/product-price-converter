@@ -8,6 +8,7 @@ import org.springframework.http.MediaType
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
+import java.util.*
 
 @ContextConfiguration(classes = [DynamoTestingConfig::class])
 class PriceConverterControllerIT : IntegrationSetup() {
@@ -31,7 +32,7 @@ class PriceConverterControllerIT : IntegrationSetup() {
 
     @Test
     fun `should return product price converted on an expected country currency`() {
-        mockMvc.get("/v1/price/convert?productCode=55308&country=EUA") {
+        mockMvc.get("/v1/price/convert?productCode=55308&countryId=b7e7d4fc-dbf5-4d75-b7ae-eeeff1d8df2d") {
             contentType = MediaType.APPLICATION_JSON
             accept = MediaType.APPLICATION_JSON
         }.andExpect {
@@ -56,12 +57,13 @@ class PriceConverterControllerIT : IntegrationSetup() {
 
     @Test
     fun `should return bad request when currency is not available for conversion`() {
-        mockMvc.get("/v1/price/convert?productCode=55308&country=UK") {
+        val countryId = UUID.randomUUID()
+        mockMvc.get("/v1/price/convert?productCode=55308&countryId=${countryId}") {
             contentType = MediaType.APPLICATION_JSON
             accept = MediaType.APPLICATION_JSON
         }.andExpect {
             status { isBadRequest }
-            jsonPath("$.message") { value("Currency from UK is not available") }
+            jsonPath("$.message") { value("Currency from country with id $countryId is not available") }
         }
     }
 }

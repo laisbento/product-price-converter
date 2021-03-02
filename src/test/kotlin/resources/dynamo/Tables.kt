@@ -29,8 +29,6 @@ class Tables {
             .withProvisionedThroughput(ProvisionedThroughput(5L, 5L))
             .withTableName("countries")
 
-        fun dropTableProduct(): DeleteTableRequest = DeleteTableRequest().withTableName("product")
-        fun dropTableCountries(): DeleteTableRequest = DeleteTableRequest().withTableName("countries")
     }
 }
 
