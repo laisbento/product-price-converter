@@ -1,0 +1,42 @@
+spring:
+  profiles:
+    active: docker
+  redis:
+    port: 6379
+    host: ${REDIS_AWS_HOST:localhost}
+server:
+  port: 8080
+  compression:
+    enabled: true
+    mime-types: application/json, application/xml, text/html, text/xml, text/plain
+  servlet:
+    context-path: /
+  shutdown: graceful
+management:
+  server:
+    port: 8081
+    base-path: /
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: beans, caches, conditions, configprops, health, loggers, metrics, mappings
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+cache:
+  service:
+    default:
+      ttl-seconds: 60
+    product:
+      ttl-days: 2
+    currency-rate:
+      ttl-days: 1
+    country:
+      ttl-days: 7
+feign:
+  client:
+    currency-api: https://free.currconv.com/api/v7/
+    api-key: ${CURRENCY_API_KEY}
