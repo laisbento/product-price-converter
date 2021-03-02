@@ -1,0 +1,20 @@
+version: '2.1'
+
+services:
+  localstack:
+    image: localstack/localstack:latest
+    ports:
+      - "4566:4566"
+      - "9000:9000"
+    environment:
+      - SERVICES=dynamodb
+      - DEFAULT_REGION=sa-east-1
+      - DATA_DIR=/tmp/localstack/data
+      - PORT_WEB_UI=9000
+      - LAMBDA_EXECUTOR=local
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - START_WEB=1
+  redis:
+    image: library/redis:alpine
+    ports:
+      - "6379:6379"
