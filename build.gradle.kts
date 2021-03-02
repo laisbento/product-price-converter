@@ -45,6 +45,7 @@ val testContainersVersion = "1.15.1"
 val mockKVersion = "1.9.3"
 val junitJupiterVersion = "5.4.2"
 val awsDynamoVersion = "1.11.96"
+val swaggerVersion = "2.9.2"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -58,6 +59,8 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign:$feignVersion")
     implementation("com.newrelic.agent.java:newrelic-agent:$newRelicVersion")
     implementation("com.newrelic.agent.java:newrelic-api:$newRelicVersion")
+    implementation("io.springfox:springfox-swagger2:$swaggerVersion")
+    implementation("io.springfox:springfox-swagger-ui:$swaggerVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion")
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
