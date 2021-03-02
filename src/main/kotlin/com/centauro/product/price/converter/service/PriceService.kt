@@ -1,8 +1,9 @@
 package com.centauro.product.price.converter.service
 
-import com.centauro.product.currency.calculator.model.response.ProductCurrencyResponse
+import com.centauro.product.price.converter.model.response.ProductCurrencyResponse
 import org.springframework.stereotype.Service
 import java.math.RoundingMode
+import java.util.*
 
 @Service
 class PriceService(
@@ -15,18 +16,18 @@ class PriceService(
         const val BRL = "BRL_"
     }
 
-    fun getProductCurrentRate(country: String?, productCode: Long): Collection<ProductCurrencyResponse> {
+    fun getProductCurrentRate(countryId: UUID?, productCode: Long): Collection<ProductCurrencyResponse> {
         val productPrice = productService.getProduct(productCode).price
 
-        return country?.let {
-            val code = countryService.getCountryCodeByName(it)
+        return countryId?.let {
+            val code = countryService.getCountryById(it)
             val pairCode = BRL.plus(code)
 
             val currencyRate = currencyService.getCurrencyRate(pairCode)[pairCode]!!.values.first()
 
             return@let listOf(
                 ProductCurrencyResponse(
-                    country = it,
+                    country = code.name,
                     price = (currencyRate * productPrice).setScale(2, RoundingMode.CEILING)
                 )
             )

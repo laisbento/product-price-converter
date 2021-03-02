@@ -1,8 +1,8 @@
 package com.centauro.product.price.converter.controller
 
-import com.centauro.product.currency.calculator.model.response.ProductCurrencyResponse
-import com.centauro.product.currency.calculator.model.response.ResponseError
-import com.centauro.product.currency.calculator.service.PriceService
+import com.centauro.product.price.converter.model.response.ProductCurrencyResponse
+import com.centauro.product.price.converter.model.response.ResponseError
+import com.centauro.product.price.converter.service.PriceService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiResponse
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
+import java.util.*
 
 @Api(
     tags = ["Product Price Converter"],
@@ -50,7 +51,7 @@ class PriceConverterController(
     )
     @GetMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    fun getProductConvertedPrices(@RequestParam(required = false) country: String?, @RequestParam productCode: Long) =
-        priceService.getProductCurrentRate(country, productCode)
+    fun getProductConvertedPrices(@RequestParam(required = false) countryId: UUID?, @RequestParam productCode: Long) =
+        priceService.getProductCurrentRate(countryId, productCode)
 
 }

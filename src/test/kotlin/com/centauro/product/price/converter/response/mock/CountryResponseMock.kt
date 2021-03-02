@@ -1,6 +1,6 @@
 package com.centauro.product.price.converter.response.mock
 
-import com.centauro.product.currency.calculator.model.entity.Country
+import com.centauro.product.price.converter.model.entity.Country
 import java.util.*
 
 class CountryResponseMock {
@@ -10,5 +10,8 @@ class CountryResponseMock {
             Country(UUID.randomUUID(), "USD", "EUA"),
             Country(UUID.randomUUID(), "IRN", "Índia")
         )
+
+        internal fun getUniqueCountry() =
+            Country(UUID.randomUUID(), "USD", "EUA")
     }
 }

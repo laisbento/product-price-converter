@@ -3,7 +3,6 @@ package resources.dynamo
 import com.amazonaws.services.dynamodbv2.document.DynamoDB
 import com.amazonaws.services.dynamodbv2.document.Item
 import com.amazonaws.services.dynamodbv2.model.CreateTableRequest
-import java.util.*
 
 class Data {
     companion object {
@@ -24,7 +23,7 @@ class Data {
             countriesTable.putItem(
                 Item.fromMap(
                     mapOf(
-                        "id" to UUID.randomUUID().toString(),
+                        "id" to "db5b5fa0-742c-4d2f-a85f-80af929b086f",
                         "code" to "INR",
                         "country" to "Índia"
                     )
@@ -33,7 +32,7 @@ class Data {
             countriesTable.putItem(
                 Item.fromMap(
                     mapOf(
-                        "id" to UUID.randomUUID().toString(),
+                        "id" to "b7e7d4fc-dbf5-4d75-b7ae-eeeff1d8df2d",
                         "code" to "USD",
                         "country" to "EUA"
                     )
