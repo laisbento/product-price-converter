@@ -1,6 +1,6 @@
 package com.centauro.product.price.converter.response.mock
 
-import com.centauro.product.currency.calculator.model.response.ProductCurrencyResponse
+import com.centauro.product.price.converter.model.response.ProductCurrencyResponse
 import java.math.BigDecimal
 import java.math.RoundingMode
 

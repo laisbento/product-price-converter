@@ -1,9 +1,9 @@
 package com.centauro.product.price.converter.service
 
-import com.centauro.product.currency.calculator.exception.EntityNotFoundException
-import com.centauro.product.currency.calculator.gateway.dynamodb.ProductDynamoGateway
-import com.centauro.product.currency.calculator.model.entity.Product
-import com.centauro.product.currency.calculator.response.mock.ProductResponseMock.Companion.getProduct
+import com.centauro.product.price.converter.exception.EntityNotFoundException
+import com.centauro.product.price.converter.gateway.dynamodb.ProductDynamoGateway
+import com.centauro.product.price.converter.model.entity.Product
+import com.centauro.product.price.converter.response.mock.ProductResponseMock.Companion.getProduct
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK

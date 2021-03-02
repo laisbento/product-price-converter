@@ -1,9 +1,9 @@
 package com.centauro.product.price.converter.exception.handler
 
-import com.centauro.product.currency.calculator.exception.CurrencyNotAvailableException
-import com.centauro.product.currency.calculator.exception.EntityNotFoundException
-import com.centauro.product.currency.calculator.exception.ExternalServiceException
-import com.centauro.product.currency.calculator.model.response.ResponseError
+import com.centauro.product.price.converter.exception.CurrencyNotAvailableException
+import com.centauro.product.price.converter.exception.EntityNotFoundException
+import com.centauro.product.price.converter.exception.ExternalServiceException
+import com.centauro.product.price.converter.model.response.ResponseError
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus

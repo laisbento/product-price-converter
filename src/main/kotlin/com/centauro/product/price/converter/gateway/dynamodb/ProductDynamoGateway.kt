@@ -3,7 +3,7 @@ package com.centauro.product.price.converter.gateway.dynamodb
 import com.amazonaws.services.dynamodbv2.document.DynamoDB
 import com.amazonaws.services.dynamodbv2.document.Item
 import com.amazonaws.services.dynamodbv2.document.KeyAttribute
-import com.centauro.product.currency.calculator.exception.ExternalServiceException
+import com.centauro.product.price.converter.exception.ExternalServiceException
 import org.springframework.stereotype.Component
 
 @Component

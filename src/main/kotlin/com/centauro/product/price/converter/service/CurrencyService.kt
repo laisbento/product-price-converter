@@ -1,7 +1,7 @@
 package com.centauro.product.price.converter.service
 
-import com.centauro.product.currency.calculator.client.CurrencyClient
-import com.centauro.product.currency.calculator.exception.ExternalServiceException
+import com.centauro.product.price.converter.client.CurrencyClient
+import com.centauro.product.price.converter.exception.ExternalServiceException
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service

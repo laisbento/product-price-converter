@@ -7,4 +7,4 @@ data class Country(
     val id: UUID,
     val code: String,
     val name: String
-): Serializable
+) : Serializable

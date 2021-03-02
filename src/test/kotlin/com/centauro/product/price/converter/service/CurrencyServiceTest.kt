@@ -1,8 +1,8 @@
 package com.centauro.product.price.converter.service
 
-import com.centauro.product.currency.calculator.client.CurrencyClient
-import com.centauro.product.currency.calculator.exception.ExternalServiceException
-import com.centauro.product.currency.calculator.response.mock.CurrencyResponseMock.Companion.currencyResponseUniqueCountry
+import com.centauro.product.price.converter.client.CurrencyClient
+import com.centauro.product.price.converter.exception.ExternalServiceException
+import com.centauro.product.price.converter.response.mock.CurrencyResponseMock.Companion.currencyResponseUniqueCountry
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
