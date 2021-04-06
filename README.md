@@ -39,7 +39,7 @@ A arquitetura dessa aplicação está constuída da seguinte maneira:
 
 ## Swagger
 É possível consultar a API da aplicação e realizar testes com seu Swagger:
-http://ec2co-ecsel-6j4uyn34m8k3-1636673804.sa-east-1.elb.amazonaws.com:8080/swagger-ui.html#
+http://localhost:8080/swagger-ui.html#
 
 ## Sonarcloud
 É possível acompanhar a qualidade do código através do dashboard no Sonarcloud:
