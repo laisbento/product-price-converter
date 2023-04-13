@@ -1,5 +1,7 @@
 # Product Price Converter
 
+### *ATTENTION: This application is not running on AWS anymore, so it's expected that it won't work properly.*
+
 This application is responsible for converting the price of a product to the current currency of a country served by a retail platform.
 
 ## Specifications
