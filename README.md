@@ -45,5 +45,6 @@ https://sonarcloud.io/dashboard?id=laisbento_product-price-converter
 
 ## New Relic
 Currently, viewing the application's performance outside of New Relic is impossible. Those interested in viewing real-time data should request access from the creator of this repository.
+
 *Application status on 02/03/2021:*
 ![enter image description here](https://i.imgur.com/CK5IK8D.png)
