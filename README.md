@@ -1,51 +1,49 @@
 # Product Price Converter
 
-Essa aplicação é responsável por converter o preço de um produto para a moeda corrente de um país atendido por uma plataforma de varejo.
+This application is responsible for converting the price of a product to the current currency of a country served by a retail platform.
 
-## Especificações
+## Specifications
 
--   *Administra as moedas dos países atendidos pela plataforma.* 
-    - Possibilita a inserção de uma nova moeda (país) para cálculo de conversão. Caso a moeda (país) não seja mais atendida pela plataforma, é possível delete-lá. Para um aumento de performance e diminuição de tempo de resposta, todas as moedas atendidas são cacheadas no Redis com um prazo de expiração de 7 dias, devido a baixa possibilidade de alteração de valores. Se houver uma inserção ou deleção, o cache é invalidado para que seja atualizado assim que houver alguma request.
-- *Realiza o cálculo do valor de um produto baseado em uma moeda selecionada.*
-  - Foi disponibilizada um endpoint que espera o código válido de um produto e o id de uma moeda.  O id da moeda é um atributo não obrigatório.
-    - **Id da moeda não informado**: o valor do produto será buscado na tabela `product` no DynamoDB. Essa entidade é cacheada no Redis com a chave `productByCode` e com um prazo de expiração de 2 dias. Depois, é buscado na tabela `countries`, também no Dynamo DB, todas as moedas cadastradas na plataforma. Essa lista é cacheada no Redis com a chave `allCountries`. Para cada moeda, é buscado seu valor contra o real, **do dia anterior**, na API `free-api-currency` e com esse valor, é calculado o valor do produto. O valor da moeda contra o real é cacheado no Redis com a chave `currency-rate` e com o prazo de expiração de 1 dia, para que no próximo dia, seu rate seja atualizado.
-    - **Id da moeda informado**: o valor do produto será buscado na tabela `product` no DynamoDB. Essa entidade é cacheada no Redis com a chave `productByCode` e com um prazo de expiração de 2 dias. Depois, é buscado na tabela `countries`, também no Dynamo DB, a moeda que possui o id enviado na request. Essa moeda é cacheada no Redis utilizando seu id como chave. Com o código da moeda desse país, é buscado seu valor contra o real, **do dia anterior**, na API `free-api-currency` e com esse valor, é calculado o valor do produto. O valor da moeda contra o real é cacheado no Redis com a chave `currency-rate` e com o prazo de expiração de 1 dia, para que no próximo dia, seu rate seja atualizado.
+-   *Manages the currencies of the countries served by the platform.* 
+    - Allows inserting a new currency (country) for conversion calculation. The platform authorizes the removal of some currency if it no longer serves some country. For increased performance and decreased response time, all currencies served are cached in Redis with an expiration period of 7 days due to the low possibility of these value changes. If there is an insertion or deletion, the cache is invalidated, so it will update as soon as there is a request.
+- *Performs the calculation of the value of a product based on a selected currency*
+  - An endpoint that expects a valid product code and a currency id has been provided. The currency id is an optional attribute.
+    - **Currency id not provided**: the product's value will be retrieved from the `product` table in DynamoDB. This entity is cached in Redis with the `productByCode` key and an expiration period of 2 days. Then, all currencies registered on the platform are retrieved from the `countries` table, also in DynamoDB. This list is cached in Redis with the `allCountries` key. For each currency, its value against the Brazilian real **from the previous day** is retrieved from the `free-api-currency` API, and with this value, the product value is calculated. The currency value against the Brazilian real is cached in Redis with the `currency-rate` key and an expiration period of 1 day so that its rate can be updated on the next day.
+    - **Currency id provided**: the product's value will be retrieved from the `product` table in DynamoDB. This entity is cached in Redis with the `productByCode` key and an expiration period of 2 days. Then, the currency with the id sent in the request is retrieved from the `countries` table, also in DynamoDB. This currency is cached in Redis using its id as the key. With the currency code for this country, its value against the Brazilian real **from the previous day** is retrieved from the `free-api-currency` API. With this value, the product value is calculated. The currency value against the Brazilian real is cached in Redis with the `currency-rate` key and an expiration period of 1 day so that its rate can be updated the next day.
 
 ## Background
 
--   [AWS Redis](https://aws.amazon.com/pt/redis/)  administra o cache da aplicação;
--   [AWS DynamoDB](https://docs.aws.amazon.com/pt_br/amazondynamodb/latest/developerguide/Introduction.html) armazena as moedas/países atentidos pela plataforma de varejo e o valor dos produtos;
--   [AWS ECS](https://docs.aws.amazon.com/pt_br/AmazonECS/latest/developerguide/Welcome.html) administra o container da aplicação;
-- [Sonarcloud](https://sonarcloud.io/documentation) administra a qualidade do código;
--  [Currency Converter API](https://www.currencyconverterapi.com/)  retorna os rates das moedas;
-- [New Relic](https://docs.newrelic.com/docs/using-new-relic/welcome-new-relic/get-started/introduction-new-relic) administra o desempenho da aplicação.
+-   [AWS Redis](https://aws.amazon.com/pt/redis/) manages the application cache;
+-   [AWS DynamoDB](https://docs.aws.amazon.com/pt_br/amazondynamodb/latest/developerguide/Introduction.html) stores the currencies/countries served by the retail platform and the product values;
+-   [AWS ECS](https://docs.aws.amazon.com/pt_br/AmazonECS/latest/developerguide/Welcome.html) manages the application container;
+- [Sonarcloud](https://sonarcloud.io/documentation) manages code quality;
+-  [Currency Converter API](https://www.currencyconverterapi.com/)  returns currency rates;
+- [New Relic](https://docs.newrelic.com/docs/using-new-relic/welcome-new-relic/get-started/introduction-new-relic) manages application performance.
 
-## Arquitetura
+## Architecture
 
-A arquitetura dessa aplicação está constuída da seguinte maneira:
+The architecture of this application is built as follows:
 
 ![enter image description here](https://i.imgur.com/pu0HdYu.png)
 
-## Requerimentos
+## Requirements
 
 -   Docker
 -   Gradle 6.3+
 -   Kotlin 1.4+
 
-## Como rodar a aplicação localmente
+## How to run the application locally
 
-`cd docker && docker-compose up` então rode a aplicação com alguma IDE ou o comando:
-`./gradlew bootRun`
+Run in a terminal `cd docker && docker-compose up`, then run the application with an IDE or run the command: `./gradlew boot`
 
 ## Swagger
-É possível consultar a API da aplicação e realizar testes com seu Swagger:
-http://localhost:8080/swagger-ui.html#
+You can consult the application API and perform tests with its Swagger: http://localhost:8080/swagger-ui.html#
 
 ## Sonarcloud
-É possível acompanhar a qualidade do código através do dashboard no Sonarcloud:
+You can monitor the code quality through the dashboard on Sonarcloud:
 https://sonarcloud.io/dashboard?id=laisbento_product-price-converter
 
 ## New Relic
-Atualmente não é possível visualizar o desempenho da aplicação fora do New Relic. Os interessados em visualizar os dados em tempo real devem solicitar acesso a criadora desse repositório.
-*Status da aplicação no dia 02/03/2021:*
+Currently, viewing the application's performance outside of New Relic is impossible. Those interested in viewing real-time data should request access from the creator of this repository.
+*Application status on 02/03/2021:*
 ![enter image description here](https://i.imgur.com/CK5IK8D.png)
